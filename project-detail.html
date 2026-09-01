@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目详情 · 李楠</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .detail-page { background: #f4f5f7; }
+      .detail-page .site-header { position: sticky; top: 0; background: rgba(244, 245, 247, 0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+      .detail-hero { padding: 100px 0 120px; }
+      .detail-copy h1 { max-width: 780px; margin: 28px 0 20px; font-size: clamp(48px, 7vw, 88px); line-height: 1.08; letter-spacing: -0.07em; }
+      .detail-intro { max-width: 620px; margin: 0; color: #777b86; font-size: 18px; }
+      .detail-meta { display: flex; gap: 18px; margin-top: 42px; color: #777b86; font: 12px "DM Sans"; }
+      .detail-meta span { padding: 9px 13px; border: 1px solid #dfe1e6; border-radius: 99px; }
+      .detail-cover { width: 100%; height: auto; aspect-ratio: 2848 / 1495; margin-top: 85px; display: block; object-fit: cover; object-position: top center; background: #fff; border-radius: 2px; }
+      .detail-body { padding-bottom: 140px; }
+      .detail-block { max-width: 760px; padding: 54px 0; border-top: 1px solid #dfe1e6; }
+      .detail-block > p:last-child { margin: 20px 0 0; color: #5f6470; font-size: 18px; line-height: 1.9; }
+      .detail-highlight { max-width: 920px; padding: 90px 0; }
+      .detail-highlight h2 { margin: 22px 0 0; font-size: clamp(30px, 4vw, 52px); line-height: 1.35; letter-spacing: -0.05em; }
+      .detail-image { width: 100%; max-height: 680px; object-fit: contain; object-position: center; display: block; margin-top: 20px; background: #fff; }
+      .background-image { margin: 18px 0 24px; padding: 18px; }
+      .solution-image { width: 100%; height: auto; max-height: none; margin-top: 48px; padding: 0; object-fit: fill; object-position: top center; }
+      .solution-steps { margin-top: 42px; border-top: 1px solid #dfe1e6; }
+      .solution-step { display: grid; grid-template-columns: 60px 1fr; gap: 20px; padding: 30px 0; border-bottom: 1px solid #dfe1e6; }
+      .solution-step > span { color: #6a9afb; font: 600 16px "DM Sans"; }
+      .solution-step h3 { margin: 0; font-size: 28px; letter-spacing: -0.04em; }
+      .solution-step p { margin: 9px 0 0; color: #777b86; font-size: 16px; line-height: 1.8; }
+      .purchase-flow-detail .detail-hero { padding-bottom: 46px; }
+      .purchase-flow-detail .detail-body .detail-block:first-child { padding-top: 24px; border-top: 0; }
+      @media (max-width: 800px) {
+        .detail-hero { padding: 70px 0 80px; }
+        .detail-cover { margin-top: 55px; height: 58vw; }
+        .detail-meta { flex-wrap: wrap; }
+        .detail-block > p:last-child { font-size: 16px; }
+      }
+    </style>
+  </head>
+  <body class="detail-page">
+    <header class="site-header">
+      <a class="brand" href="index.html">LN<span>.</span></a>
+      <a class="header-contact" href="index.html#projects">返回项目 ↗</a>
+    </header>
+    <main id="detail-root"></main>
+    <script src="project-detail.js"></script>
+  </body>
+</html>

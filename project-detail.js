@@ -42,9 +42,15 @@ const projects = {
     role: "项目发起人 / 交互设计师",
     team: "带领设计同学协作推进",
     image: "assets/live-growth-cover.png",
+    solutionImage: "assets/live-growth-solution.png",
     background: "从购买链路业务转向直播电商后，主动发现直播间氛围冷清、商品感知弱、用户下单意愿不足等问题。",
     problem: "直播间购买入口吸引力不足，商品卖点表达不充分，优惠券与红包雨等营销玩法的操作链路也有优化空间。",
-    solution: "绘制用户行为地图并开展竞品分析，以“吸引力 × 氛围感”为策略，升级优惠券、红包雨、商品讲解卡和热卖标签等关键体验。",
+    solution: "绘制用户行为地图并开展竞品分析，以“吸引力 × 氛围感”为策略，制定直播间购买体验设计策略。",
+    solutionSteps: [
+      ["01", "激活挂件引流", "通过优惠券、红包雨等高吸引力挂件强化直播间入口与互动氛围，引导用户进入购买链路。"],
+      ["02", "丰富商品感知", "升级商品讲解卡、商品信息与热卖标签，让商品卖点、价格和购买理由更清晰。"],
+      ["03", "焕新营销玩法", "优化营销玩法的操作链路与视觉表现，建立更连续、更有节奏的直播间购买体验。"]
+    ],
     result: "提升直播间购买氛围和商品感知，形成可复用的大促氛围展示位与营销玩法规范。"
   },
   "purchase-flow": {
@@ -79,6 +85,7 @@ const key = new URLSearchParams(window.location.search).get("project") || "fulfi
 const project = projects[key] || projects.fulfillment;
 const isPurchaseFlow = key === "purchase-flow";
 document.body.classList.toggle("purchase-flow-detail", isPurchaseFlow);
+const hasStrategySteps = Array.isArray(project.solutionSteps);
 const solutionContent = isPurchaseFlow
   ? `
     <div class="solution-steps">
@@ -94,6 +101,18 @@ const solutionContent = isPurchaseFlow
         <span>03</span>
         <div><h3>视觉升级</h3><p>重构核心页面的信息层级、内容排布和组件表现，让不同场景中的购买体验更统一、更易理解。</p></div>
       </article>
+    </div>
+  `
+  : hasStrategySteps
+  ? `
+    <h2>${project.solution}</h2>
+    <div class="solution-steps">
+      ${project.solutionSteps.map(([number, title, copy]) => `
+        <article class="solution-step">
+          <span>${number}</span>
+          <div><h3>${title}</h3><p>${copy}</p></div>
+        </article>
+      `).join("")}
     </div>
   `
   : `<h2>${project.solution}</h2>`;
@@ -113,7 +132,7 @@ document.querySelector("#detail-root").innerHTML = `
     <div class="detail-block"><p class="section-number">01 / 背景</p><p>${project.background}</p></div>
     ${isPurchaseFlow ? `<img class="detail-image background-image" src="${project.backgroundImage}" alt="内循环购买链路项目背景" />` : ""}
     <div class="detail-block"><p class="section-number">02 / 问题</p><p>${project.problem}</p></div>
-    <div class="detail-block detail-highlight"><p class="section-number">03 / 设计方案</p>${solutionContent}${isPurchaseFlow ? `<img class="detail-image solution-image" src="${project.solutionImage}" alt="内循环购买链路设计方案" />` : ""}</div>
+    <div class="detail-block detail-highlight"><p class="section-number">03 / 设计方案</p>${solutionContent}${project.solutionImage ? `<img class="detail-image solution-image" src="${project.solutionImage}" alt="${project.title}设计方案" />` : ""}</div>
     <div class="detail-block"><p class="section-number">04 / 项目成果</p><p>${project.result}</p></div>
     ${isPurchaseFlow ? "" : `<img class="detail-image" src="${project.image}" alt="${project.title} 设计展示" />`}
   </section>

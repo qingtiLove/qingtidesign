@@ -6,6 +6,7 @@ const projects = {
     role: "设计发起人 / 设计负责人",
     team: "带领 1 名外包同学",
     image: "assets/fulfillment-cover.png",
+    solutionImage: "assets/fulfillment-solution.png",
     background: "接手商家端设计接口人任务后，从满意度调研中发现履约模块是经营后台中体验问题最集中的部分，因此发起专项升级。",
     problem: "商家容易错过关键订单状态，异常订单定位不便，售后处理路径较长，同时页面信息密度与视觉规范也需要更新。",
     solution: "以“信息主动触达、筛选精准定位、操作路径压缩”为设计主张，完成竞品调研、方案设计、双端协同和规范沉淀。",
@@ -18,9 +19,12 @@ const projects = {
     role: "项目发起人 / 设计负责人",
     team: "带领 2 名外包同学",
     image: "assets/live-console-cover.png",
+    solutionImage: "assets/live-console-solution.png",
+    solutionImageSecondary: "assets/live-console-flow.png",
     background: "头部主播团队反馈中控台不好用。通过全链路体验走查发现，问题不仅是商品检索效率低，还包括开播前、中、后的链路断裂。",
     problem: "中控操作效率低、交互不一致，基础能力不完善，开播后的内容沉淀与二次经营链路也不完整。",
-    solution: "确定“补齐断点 + 中控重构”的设计主张，绘制理想态开播链路，完成实时中控重构，并推动预约直播、切片管理与发布能力落地。",
+    solution: "通过现状梳理和竞品分析，绘制理想态开播链路图。",
+    solutionFollowup: "制定推动节奏，优先“补齐断点”“重构中控”，然后“建设切片管理—盘活流量”，最后补齐基础能力“预约直播—养成习惯”。完整推进预约—开播—发布全流程的能力体验升级。",
     result: "打通直播前、中、后体验，补齐关键基础能力，提升直播团队的操作效率与整体体验。"
   },
   "ai-system": {
@@ -30,6 +34,7 @@ const projects = {
     role: "项目负责人 / 设计发起人",
     team: "带领 5 名外包同学",
     image: "assets/ai-system-cover.png",
+    solutionImage: "assets/ai-system-solution.png",
     background: "商家端、直播端和投放端陆续上线 AI 能力，但视觉元素和交互规则各自为政，用户感知到的是多个工具，而不是一个统一的平台。",
     problem: "AI 入口、对话框架、反馈方式和视觉语言不一致，增加了商家理解成本，也提高了后续维护成本。",
     solution: "围绕 AI 如何介入用户操作，提炼嵌入式、伴随式、托管式三大交互范式，统一入口、对话和反馈的体验语言。",
@@ -51,6 +56,8 @@ const projects = {
       ["02", "丰富商品感知", "升级商品讲解卡、商品信息与热卖标签，让商品卖点、价格和购买理由更清晰。"],
       ["03", "焕新营销玩法", "优化营销玩法的操作链路与视觉表现，建立更连续、更有节奏的直播间购买体验。"]
     ],
+    challenge: "业务线刚拆分独立，信任基础与人力资源有限，业务方也尚未明确具体迭代方向。为获得支持并推动项目落地，自创价值四维打分法，围绕影响力、转化相关性、使用频率和竞品差异评估需求优先级，再与业务、产品和研发达成共识，分阶段推进方案落地。",
+    challengeImage: "assets/live-growth-challenge.png",
     result: "提升直播间购买氛围和商品感知，形成可复用的大促氛围展示位与营销玩法规范。"
   },
   "purchase-flow": {
@@ -84,6 +91,7 @@ const projects = {
 const key = new URLSearchParams(window.location.search).get("project") || "fulfillment";
 const project = projects[key] || projects.fulfillment;
 const isPurchaseFlow = key === "purchase-flow";
+const isLiveConsole = key === "live-console";
 document.body.classList.toggle("purchase-flow-detail", isPurchaseFlow);
 const hasStrategySteps = Array.isArray(project.solutionSteps);
 const solutionContent = isPurchaseFlow
@@ -101,6 +109,14 @@ const solutionContent = isPurchaseFlow
         <span>03</span>
         <div><h3>视觉升级</h3><p>重构核心页面的信息层级、内容排布和组件表现，让不同场景中的购买体验更统一、更易理解。</p></div>
       </article>
+    </div>
+  `
+  : isLiveConsole
+  ? `
+    <h2>${project.solution}</h2>
+    <img class="detail-image solution-image" src="${project.solutionImageSecondary}" alt="${project.title}理想态开播链路图" />
+    <div class="solution-followup">
+      <p>${project.solutionFollowup}</p>
     </div>
   `
   : hasStrategySteps
@@ -132,8 +148,9 @@ document.querySelector("#detail-root").innerHTML = `
     <div class="detail-block"><p class="section-number">01 / 背景</p><p>${project.background}</p></div>
     ${isPurchaseFlow ? `<img class="detail-image background-image" src="${project.backgroundImage}" alt="内循环购买链路项目背景" />` : ""}
     <div class="detail-block"><p class="section-number">02 / 问题</p><p>${project.problem}</p></div>
-    <div class="detail-block detail-highlight"><p class="section-number">03 / 设计方案</p>${solutionContent}${project.solutionImage ? `<img class="detail-image solution-image" src="${project.solutionImage}" alt="${project.title}设计方案" />` : ""}</div>
-    <div class="detail-block"><p class="section-number">04 / 项目成果</p><p>${project.result}</p></div>
-    ${isPurchaseFlow ? "" : `<img class="detail-image" src="${project.image}" alt="${project.title} 设计展示" />`}
+    <div class="detail-block detail-highlight"><p class="section-number">03 / 设计方案</p>${solutionContent}${project.solutionImage && !isLiveConsole ? `<img class="detail-image solution-image" src="${project.solutionImage}" alt="${project.title}设计方案" />` : ""}</div>
+    ${project.challenge ? `<div class="detail-block detail-challenge"><p class="section-number">04 / 项目难点</p><p>${project.challenge}</p><img class="detail-image challenge-image" src="${project.challengeImage}" alt="${project.title}项目难点与落地方法" /></div>` : ""}
+    <div class="detail-block"><p class="section-number">${project.challenge ? "05" : "04"} / 项目成果</p><p>${project.result}</p></div>
+    ${isPurchaseFlow || project.challenge ? "" : `<img class="detail-image" src="${project.image}" alt="${project.title} 设计展示" />`}
   </section>
 `;
